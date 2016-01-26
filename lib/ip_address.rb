@@ -12,18 +12,18 @@
 # Ruby Class goes here
 class MachineIpAddr
 
-  def initialize(ip)
-    @ip = ip
+  def initialize
     
-# line 19 "lib/ip_address.rb"
+# line 18 "lib/ip_address.rb"
 class << self
 	attr_accessor :_m_ipaddr_key_offsets
 	private :_m_ipaddr_key_offsets, :_m_ipaddr_key_offsets=
 end
 self._m_ipaddr_key_offsets = [
-	0, 0, 2, 5, 7, 10, 12, 15, 
-	17, 20, 21, 24, 25, 28, 29, 31, 
-	33
+	0, 0, 5, 8, 13, 16, 21, 24, 
+	29, 32, 33, 39, 42, 45, 46, 52, 
+	55, 58, 59, 65, 68, 70, 72, 72, 
+	77
 ]
 
 class << self
@@ -31,11 +31,16 @@ class << self
 	private :_m_ipaddr_trans_keys, :_m_ipaddr_trans_keys=
 end
 self._m_ipaddr_trans_keys = [
-	48, 57, 46, 48, 57, 48, 57, 46, 
-	48, 57, 48, 57, 46, 48, 57, 48, 
-	57, 46, 48, 57, 46, 46, 48, 57, 
-	46, 46, 48, 57, 46, 48, 57, 48, 
-	57, 0
+	50, 48, 49, 51, 57, 46, 48, 57, 
+	50, 48, 49, 51, 57, 46, 48, 57, 
+	50, 48, 49, 51, 57, 46, 48, 57, 
+	50, 48, 49, 51, 57, 46, 48, 57, 
+	46, 46, 53, 48, 52, 54, 57, 46, 
+	48, 53, 46, 48, 57, 46, 46, 53, 
+	48, 52, 54, 57, 46, 48, 53, 46, 
+	48, 57, 46, 46, 53, 48, 52, 54, 
+	57, 46, 48, 53, 48, 57, 48, 57, 
+	53, 48, 52, 54, 57, 48, 53, 0
 ]
 
 class << self
@@ -43,8 +48,9 @@ class << self
 	private :_m_ipaddr_single_lengths, :_m_ipaddr_single_lengths=
 end
 self._m_ipaddr_single_lengths = [
-	0, 0, 1, 0, 1, 0, 1, 0, 
-	1, 1, 1, 1, 1, 1, 0, 0, 
+	0, 1, 1, 1, 1, 1, 1, 1, 
+	1, 1, 2, 1, 1, 1, 2, 1, 
+	1, 1, 2, 1, 0, 0, 0, 1, 
 	0
 ]
 
@@ -53,9 +59,10 @@ class << self
 	private :_m_ipaddr_range_lengths, :_m_ipaddr_range_lengths=
 end
 self._m_ipaddr_range_lengths = [
-	0, 1, 1, 1, 1, 1, 1, 1, 
-	1, 0, 1, 0, 1, 0, 1, 1, 
-	0
+	0, 2, 1, 2, 1, 2, 1, 2, 
+	1, 0, 2, 1, 1, 0, 2, 1, 
+	1, 0, 2, 1, 1, 1, 0, 2, 
+	1
 ]
 
 class << self
@@ -63,9 +70,10 @@ class << self
 	private :_m_ipaddr_index_offsets, :_m_ipaddr_index_offsets=
 end
 self._m_ipaddr_index_offsets = [
-	0, 0, 2, 5, 7, 10, 12, 15, 
-	17, 20, 22, 25, 27, 30, 32, 34, 
-	36
+	0, 0, 4, 7, 11, 14, 18, 21, 
+	25, 28, 30, 35, 38, 41, 43, 48, 
+	51, 54, 56, 61, 64, 66, 68, 69, 
+	73
 ]
 
 class << self
@@ -73,11 +81,16 @@ class << self
 	private :_m_ipaddr_trans_targs, :_m_ipaddr_trans_targs=
 end
 self._m_ipaddr_trans_targs = [
-	2, 0, 3, 12, 0, 4, 0, 5, 
-	10, 0, 6, 0, 7, 8, 0, 14, 
-	0, 7, 9, 0, 7, 0, 5, 11, 
-	0, 5, 0, 3, 13, 0, 3, 0, 
-	15, 0, 16, 0, 0, 0
+	18, 2, 16, 0, 3, 16, 0, 14, 
+	4, 12, 0, 5, 12, 0, 10, 6, 
+	8, 0, 7, 8, 0, 23, 20, 21, 
+	0, 7, 9, 0, 7, 0, 7, 11, 
+	8, 9, 0, 7, 9, 0, 5, 13, 
+	0, 5, 0, 5, 15, 12, 13, 0, 
+	5, 13, 0, 3, 17, 0, 3, 0, 
+	3, 19, 16, 17, 0, 3, 17, 0, 
+	21, 0, 22, 0, 0, 24, 21, 22, 
+	0, 22, 0, 0
 ]
 
 class << self
@@ -87,7 +100,7 @@ self.m_ipaddr_start = 1;
 class << self
 	attr_accessor :m_ipaddr_first_final
 end
-self.m_ipaddr_first_final = 14;
+self.m_ipaddr_first_final = 20;
 class << self
 	attr_accessor :m_ipaddr_error
 end
@@ -99,22 +112,21 @@ end
 self.m_ipaddr_en_main = 1;
 
 
-# line 19 "lib/ip_address.rl"
+# line 18 "lib/ip_address.rl"
   end
 
-  def is_valid?
-    data = @ip
+  def is_valid?(data)
     
-# line 109 "lib/ip_address.rb"
+# line 121 "lib/ip_address.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_ipaddr_start
 end
 
-# line 24 "lib/ip_address.rl"
+# line 22 "lib/ip_address.rl"
     
-# line 118 "lib/ip_address.rb"
+# line 130 "lib/ip_address.rb"
 begin
 	_klen, _trans, _keys = nil
 	_goto_level = 0
@@ -206,7 +218,7 @@ begin
 	end
 	end
 
-# line 25 "lib/ip_address.rl"
+# line 23 "lib/ip_address.rl"
     cs >= m_ipaddr_first_final
   end
 end

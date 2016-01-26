@@ -13,13 +13,11 @@
 # Ruby Class goes here
 class MachineIpAddr
 
-  def initialize(ip)
-    @ip = ip
+  def initialize
     %% write data;
   end
 
-  def is_valid?
-    data = @ip
+  def is_valid?(data)
     %% write init;
     %% write exec;
     cs >= m_ipaddr_first_final
