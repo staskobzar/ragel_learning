@@ -6,6 +6,7 @@ bin
 Gemfile.lock
 .bundle
 *.rbc
+*.log
 bundle
 .bundle
 specs.out
