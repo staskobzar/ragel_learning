@@ -31,10 +31,21 @@ RSpec.describe MachineURI do
         urn:example:animal:ferret:nose
         mailto:John.Doe@example.com
         news:comp.infosystems.www.servers.unix
+        sip:12345@sip-provider.info:5060
+        sips:johndoe@sip.secure.com
         tel:+1-816-555-1212
       }.each do |uri|
           expect( MachineURI.new(uri).is_valid? ).to be true
         end
+    end
+  end
+
+  context "component parts parsing" do
+    describe "#scheme" do
+      it "should be 'foo'" do
+        uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
+        expect(uri.scheme).to eq("foo")
+      end
     end
   end
 end

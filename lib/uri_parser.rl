@@ -29,5 +29,3 @@ class MachineURI
   end
 end
 
-o = MachineURI.new("mailto:user@domain.com")
-puts o.is_valid?

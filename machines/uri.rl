@@ -12,6 +12,9 @@
   machine uri;
   include ip_addr "ip_addr.rl";
 
+  action fetch_scheme{
+  }
+
 # Percent-Encoding. Example: "%20" (space)
   PCT_ENC         = "%" xdigit xdigit;
 
@@ -28,12 +31,12 @@
 
 # URI  Scheme
 # scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-  SCHEME          = alpha (alnum | [+\-\.])*;
+  SCHEME          = alpha (alnum | [+\-\.])* @fetch_scheme;
 
 # Hierarchical element for a naming authority
 # authority   = [ userinfo "@" ] host [ ":" port ]
   USERINFO        = (UNRESERVED | PCT_ENC | SUB_DELIMS | ":")*;
-  IPv_FUTURE      = "v" xdigit{,1} "." (UNRESERVED | SUB_DELIMS | ":"){,1};
+  IPv_FUTURE      = "v" xdigit{1,} "." (UNRESERVED | SUB_DELIMS | ":"){1,};
   IP_LITERAL      = "[" (IPv6_ADDR | IPv_FUTURE) "]";
   REG_NAME        = (UNRESERVED | PCT_ENC | SUB_DELIMS)*;
   HOST            = IP_LITERAL | IPv4_ADDR | REG_NAME;
@@ -42,8 +45,8 @@
   
 # Path RFC 3986 Section 3.3
   PCHAR           = UNRESERVED | PCT_ENC | SUB_DELIMS | ":" | "@";
-  SEG_NZ_NC       = (UNRESERVED | PCT_ENC | SUB_DELIMS | "@"){,1};
-  SEG_NZ          = PCHAR{,1};
+  SEG_NZ_NC       = (UNRESERVED | PCT_ENC | SUB_DELIMS | "@"){1,};
+  SEG_NZ          = PCHAR{1,};
   SEGMENT         = PCHAR*;
   PATH_EMPTY      = '\0';
   PATH_ROOTLESS   = SEG_NZ ("/" SEGMENT)*;
