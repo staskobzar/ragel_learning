@@ -6,9 +6,6 @@ RSpec.describe MachineURI do
     specify {
       expect(MachineURI.new("http://www.ietf.org/rfc/rfc2396.txt")
         .is_valid?).to be true}
-    specify {
-      expect(MachineURI.new("test false.txt")
-        .is_valid?).to be false }
 
     it "testing multiple samples with authority part" do
       %W{
@@ -45,6 +42,11 @@ RSpec.describe MachineURI do
       it "should be 'foo'" do
         uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
         expect(uri.scheme).to eq("foo")
+      end
+      it "raises error on invalid scheme" do
+        expect {
+          MachineURI.new "1foo://google.com"
+        }.to raise_error(URIParserInvalidScheme)
       end
     end
   end

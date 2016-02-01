@@ -17,3 +17,18 @@ task :ragel do
     sh "#{ragel} -R #{file}"
   end
 end
+
+desc "Create transition graphs."
+task :graph do
+  format = "svg"
+  ragel = find_executable('ragel')
+  raise ArgumentError, "Ragel executable not found" unless ragel
+  dot = find_executable('dot')
+  raise ArgumentError, "Graphviz executable not found" unless dot
+  Dir["lib/*.rl"].each do |file|
+    sh "#{ragel} -R #{file}"
+    sh "#{ragel} -Vp #{file} -o #{file}.dot" 
+    sh "#{dot} #{file}.dot -T#{format} -o #{file}.#{format}"
+    sh "rm #{file}.dot"
+  end
+end

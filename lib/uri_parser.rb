@@ -10,18 +10,21 @@
 # line 12 "lib/uri_parser.rl"
 
 =end
+class URIParserError < Exception; end
+class URIParserInvalidScheme < URIParserError; end
 
 class MachineURI
+  attr_accessor :scheme
   def initialize(data)
     @is_valid = false
     
-# line 19 "lib/uri_parser.rb"
+# line 22 "lib/uri_parser.rb"
 class << self
 	attr_accessor :_m_uri_actions
 	private :_m_uri_actions, :_m_uri_actions=
 end
 self._m_uri_actions = [
-	0, 1, 0
+	0, 1, 0, 1, 1
 ]
 
 class << self
@@ -496,8 +499,8 @@ self._m_uri_indicies = [
 	7, 197, 9, 198, 18, 9, 18, 18, 
 	18, 18, 18, 1, 7, 9, 9, 198, 
 	1, 7, 9, 198, 9, 1, 2, 7, 
-	3, 199, 9, 200, 2, 2, 9, 2, 
-	2, 2, 2, 199, 199, 199, 1, 0
+	3, 5, 9, 200, 2, 2, 9, 2, 
+	2, 2, 2, 5, 5, 5, 199, 0
 ]
 
 class << self
@@ -529,7 +532,7 @@ self._m_uri_trans_targs = [
 	163, 166, 164, 165, 167, 168, 171, 169, 
 	170, 172, 178, 181, 182, 173, 177, 174, 
 	176, 175, 179, 180, 184, 185, 186, 4, 
-	2, 193, 8, 195, 15, 13, 198, 200, 
+	2, 193, 8, 195, 15, 13, 198, 0, 
 	187
 ]
 
@@ -562,8 +565,8 @@ self._m_uri_trans_actions = [
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 1, 
-	0
+	0, 0, 0, 0, 0, 0, 0, 3, 
+	1
 ]
 
 class << self
@@ -585,18 +588,18 @@ end
 self.m_uri_en_main = 1;
 
 
-# line 19 "lib/uri_parser.rl"
+# line 22 "lib/uri_parser.rl"
     
-# line 591 "lib/uri_parser.rb"
+# line 594 "lib/uri_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_uri_start
 end
 
-# line 20 "lib/uri_parser.rl"
+# line 23 "lib/uri_parser.rl"
     
-# line 600 "lib/uri_parser.rb"
+# line 603 "lib/uri_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -681,8 +684,16 @@ when 0 then
 # line 15 "lib/../machines/uri.rl"
 		begin
 
+    @scheme = data[0..p-1]
   		end
-# line 686 "lib/uri_parser.rb"
+when 1 then
+# line 18 "lib/../machines/uri.rl"
+		begin
+
+    puts "ERROR in CHAR #{fc}"
+    raise URIParserInvalidScheme
+  		end
+# line 697 "lib/uri_parser.rb"
 			end # action switch
 		end
 	end
@@ -709,15 +720,18 @@ when 0 then
 	end
 	end
 
-# line 21 "lib/uri_parser.rl"
+# line 24 "lib/uri_parser.rl"
     #%
     if cs >= m_uri_first_final
       @is_valid = true
+    else
+      raise URIParserError
     end
   end
 
   def is_valid?
     @is_valid
   end
+
 end
 

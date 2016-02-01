@@ -13,6 +13,11 @@
   include ip_addr "ip_addr.rl";
 
   action fetch_scheme{
+    @scheme = data[0..p-1]
+  }
+  action error_scheme{
+    puts "ERROR in CHAR #{fc}"
+    raise URIParserInvalidScheme
   }
 
 # Percent-Encoding. Example: "%20" (space)
@@ -31,7 +36,7 @@
 
 # URI  Scheme
 # scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-  SCHEME          = alpha (alnum | [+\-\.])* @fetch_scheme;
+  SCHEME          = (alpha (alnum | [+\-\.])* %fetch_scheme) %err(error_scheme);
 
 # Hierarchical element for a naming authority
 # authority   = [ userinfo "@" ] host [ ":" port ]
