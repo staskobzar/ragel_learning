@@ -16,7 +16,6 @@
   #
   # Additionally also treating leading "0".
   # For example 001.010.100.1 == 1.10.100.1
-
   OCTET4 =  ("0" | "00")? digit |
             "0"? [1-9] digit    |
             "1" digit{2}        |
@@ -42,7 +41,6 @@
   # 
   #       h16         = 1*4HEXDIG
   #                   ; 16 bits of address represented in hexadecimal
-
   H16       = xdigit{1,4} ;
   LS32      = (H16 ":" H16) | IPv4_ADDR ;
   IPv6_ADDR =                        (H16 ":"){6} LS32 |
@@ -56,7 +54,7 @@
               (H16 ":"){,5} H16 "::"              H16  |
               (H16 ":"){,6} H16 "::"                   ;
 
-  # IP addree
+  # IP address
   IP_ADDR = IPv4_ADDR | IPv6_ADDR;
 
 }%%

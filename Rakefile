@@ -6,7 +6,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :default do
   Rake::Task['ragel'].invoke
-  #Rake::Task['spec'].invoke
+  Rake::Task['spec'].invoke
 end
 
 desc "Build ragel machines into ruby classes."
