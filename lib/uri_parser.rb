@@ -7,24 +7,26 @@
 
 =begin
 
-# line 12 "lib/uri_parser.rl"
+# line 32 "lib/uri_parser.rl"
 
 =end
 class URIParserError < Exception; end
-class URIParserInvalidScheme < URIParserError; end
 
 class MachineURI
-  attr_accessor :scheme
+  attr_accessor :scheme, :host
   def initialize(data)
     @is_valid = false
+    eof = data.length
+    start = 0
     
-# line 22 "lib/uri_parser.rb"
+# line 23 "lib/uri_parser.rb"
 class << self
 	attr_accessor :_m_uri_actions
 	private :_m_uri_actions, :_m_uri_actions=
 end
 self._m_uri_actions = [
-	0, 1, 0, 1, 1
+	0, 1, 0, 1, 1, 1, 2, 2, 
+	2, 1
 ]
 
 class << self
@@ -488,19 +490,19 @@ self._m_uri_indicies = [
 	9, 9, 9, 9, 1, 2, 7, 3, 
 	9, 2, 2, 9, 2, 2, 2, 2, 
 	2, 1, 9, 7, 191, 193, 9, 9, 
-	9, 9, 9, 9, 1, 12, 7, 194, 
-	9, 195, 12, 9, 15, 196, 12, 12, 
-	12, 12, 12, 1, 12, 7, 194, 9, 
-	195, 12, 9, 15, 12, 12, 12, 12, 
+	9, 9, 9, 9, 1, 194, 195, 196, 
+	197, 198, 194, 197, 15, 199, 194, 194, 
+	194, 194, 194, 1, 12, 7, 200, 9, 
+	201, 12, 9, 15, 12, 12, 12, 12, 
 	12, 1, 13, 7, 14, 9, 13, 9, 
-	15, 13, 13, 13, 195, 13, 13, 13, 
-	1, 18, 7, 197, 9, 198, 18, 9, 
-	196, 18, 18, 18, 18, 18, 1, 18, 
-	7, 197, 9, 198, 18, 9, 18, 18, 
-	18, 18, 18, 1, 7, 9, 9, 198, 
-	1, 7, 9, 198, 9, 1, 2, 7, 
-	3, 5, 9, 200, 2, 2, 9, 2, 
-	2, 2, 2, 5, 5, 5, 199, 0
+	15, 13, 13, 13, 201, 13, 13, 13, 
+	1, 202, 195, 203, 197, 204, 202, 197, 
+	199, 202, 202, 202, 202, 202, 1, 18, 
+	7, 205, 9, 206, 18, 9, 18, 18, 
+	18, 18, 18, 1, 7, 9, 9, 206, 
+	1, 7, 9, 206, 9, 1, 2, 7, 
+	3, 5, 9, 207, 2, 2, 9, 2, 
+	2, 2, 2, 5, 5, 5, 1, 0
 ]
 
 class << self
@@ -532,8 +534,8 @@ self._m_uri_trans_targs = [
 	163, 166, 164, 165, 167, 168, 171, 169, 
 	170, 172, 178, 181, 182, 173, 177, 174, 
 	176, 175, 179, 180, 184, 185, 186, 4, 
-	2, 193, 8, 195, 15, 13, 198, 0, 
-	187
+	2, 193, 194, 189, 8, 190, 195, 15, 
+	8, 195, 197, 13, 198, 13, 198, 187
 ]
 
 class << self
@@ -542,6 +544,38 @@ class << self
 end
 self._m_uri_trans_actions = [
 	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 3, 0, 0, 0, 
+	0, 0, 3, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 3, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 7, 5, 5, 5, 5, 5, 
+	0, 0, 7, 5, 5, 0, 0, 1
+]
+
+class << self
+	attr_accessor :_m_uri_eof_actions
+	private :_m_uri_eof_actions, :_m_uri_eof_actions=
+end
+self._m_uri_eof_actions = [
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
@@ -565,8 +599,9 @@ self._m_uri_trans_actions = [
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
 	0, 0, 0, 0, 0, 0, 0, 0, 
-	0, 0, 0, 0, 0, 0, 0, 3, 
-	1
+	0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 5, 0, 0, 5, 0, 0, 0, 
+	0
 ]
 
 class << self
@@ -588,18 +623,18 @@ end
 self.m_uri_en_main = 1;
 
 
-# line 22 "lib/uri_parser.rl"
+# line 43 "lib/uri_parser.rl"
     
-# line 594 "lib/uri_parser.rb"
+# line 629 "lib/uri_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_uri_start
 end
 
-# line 23 "lib/uri_parser.rl"
+# line 44 "lib/uri_parser.rl"
     
-# line 603 "lib/uri_parser.rb"
+# line 638 "lib/uri_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -681,19 +716,22 @@ begin
 			_acts += 1
 			case _m_uri_actions[_acts - 1]
 when 0 then
-# line 15 "lib/../machines/uri.rl"
+# line 11 "lib/uri_parser.rl"
 		begin
 
     @scheme = data[0..p-1]
   		end
 when 1 then
-# line 18 "lib/../machines/uri.rl"
+# line 15 "lib/uri_parser.rl"
 		begin
 
-    puts "ERROR in CHAR #{fc}"
-    raise URIParserInvalidScheme
+    @host = data[start..p]
   		end
-# line 697 "lib/uri_parser.rb"
+when 2 then
+# line 19 "lib/uri_parser.rl"
+		begin
+start=p		end
+# line 735 "lib/uri_parser.rb"
 			end # action switch
 		end
 	end
@@ -713,6 +751,25 @@ when 1 then
 	end
 	end
 	if _goto_level <= _test_eof
+	if p == eof
+	__acts = _m_uri_eof_actions[cs]
+	__nacts =  _m_uri_actions[__acts]
+	__acts += 1
+	while __nacts > 0
+		__nacts -= 1
+		__acts += 1
+		case _m_uri_actions[__acts - 1]
+when 2 then
+# line 19 "lib/uri_parser.rl"
+		begin
+start=p		end
+# line 767 "lib/uri_parser.rb"
+		end # eof action switch
+	end
+	if _trigger_goto
+		next
+	end
+end
 	end
 	if _goto_level <= _out
 		break
@@ -720,7 +777,7 @@ when 1 then
 	end
 	end
 
-# line 24 "lib/uri_parser.rl"
+# line 45 "lib/uri_parser.rl"
     #%
     if cs >= m_uri_first_final
       @is_valid = true

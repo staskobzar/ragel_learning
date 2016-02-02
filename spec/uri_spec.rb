@@ -43,10 +43,35 @@ RSpec.describe MachineURI do
         uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
         expect(uri.scheme).to eq("foo")
       end
+      it "should be 'sip'" do
+        uri = MachineURI.new "sip:username@example.com"
+        expect(uri.scheme).to eq("sip")
+      end
       it "raises error on invalid scheme" do
         expect {
-          MachineURI.new "1foo://google.com"
-        }.to raise_error(URIParserInvalidScheme)
+          MachineURI.new "f~oo://google.com"
+        }.to raise_error(URIParserError)
+        expect {
+          MachineURI.new "1http://google.com"
+        }.to raise_error(URIParserError)
+      end
+    end
+    describe "#host" do
+      it "should be 'example.com'" do
+        uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
+        expect(uri.host).to eq("example.com")
+      end
+      it "should be 'sip-provider.info'" do
+        uri = MachineURI.new "sip:12345@sip-provider.info:5060"
+        expect(uri.host).to eq("sip-provider.info")
+      end
+      it "should be '[2001:db8::7]'" do
+        uri = MachineURI.new "ldap://[2001:db8::7]/c=GB?objectClass?one"
+        expect(uri.host).to eq("[2001:db8::7]")
+      end
+      it "should be '192.0.2.16'" do
+        uri = MachineURI.new "telnet://192.0.2.16:80/"
+        expect(uri.host).to eq("192.0.2.16")
       end
     end
   end
