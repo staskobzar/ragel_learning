@@ -31,6 +31,10 @@
     @port = data[start..p-1].to_i
   }
 
+  action fetch_path{
+    @path = data[start..p-1]
+  }
+
   action fetch_query{
     @query = data[start..p-1]
   }
@@ -77,10 +81,10 @@
   SEG_NZ          = PCHAR{1,};
   SEGMENT         = PCHAR*;
   PATH_EMPTY      = '\0';
-  PATH_ROOTLESS   = SEG_NZ ("/" SEGMENT)*;
-  PATH_NOSCHEME   = SEG_NZ_NC ("/" SEGMENT)*;
-  PATH_ABSOLUTE   = "/" (SEG_NZ ("/" SEGMENT)*)?;
-  PATH_ABEMPTY    = ("/" SEGMENT)*;
+  PATH_ROOTLESS   = (SEG_NZ ("/" SEGMENT)*)  >{start=p} %fetch_path;
+  PATH_NOSCHEME   = (SEG_NZ_NC ("/" SEGMENT)*) >{start=p} %fetch_path;
+  PATH_ABSOLUTE   = ("/" (SEG_NZ ("/" SEGMENT)*)?) >{start=p} %fetch_path;
+  PATH_ABEMPTY    = ("/" SEGMENT)* >{start=p} %fetch_path;
 
   PATH            = PATH_ABEMPTY | # begins with "/" or is empty
                     PATH_ABSOLUTE | # begins with "/" but not "//"

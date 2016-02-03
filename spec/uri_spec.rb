@@ -56,6 +56,7 @@ RSpec.describe MachineURI do
         }.to raise_error(URIParserError)
       end
     end
+
     describe "#host" do
       it "should be 'example.com'" do
         uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
@@ -78,6 +79,7 @@ RSpec.describe MachineURI do
         expect(uri.host).to be_nil
       end
     end
+
     describe "#userinfo" do
       it "should be 'john'" do
         uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
@@ -92,6 +94,7 @@ RSpec.describe MachineURI do
       #  expect(uri.userinfo).to eq("12345")
       #end
     end
+
     describe "#port" do
       it "should be 8042" do
         uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
@@ -102,6 +105,22 @@ RSpec.describe MachineURI do
         expect(uri.port).to be_nil
       end
     end
+
+    describe "#path" do
+      it "should be '/rfc/rfc2396.txt'" do
+        uri = MachineURI.new "http://www.ietf.org/rfc/rfc2396.txt#section%205.2"
+        expect(uri.path).to eq("/rfc/rfc2396.txt")
+      end
+      it "should be nil'" do
+        uri = MachineURI.new "telnet://192.0.2.16:80"
+        expect(uri.path).to be_empty
+      end
+      it "should be 'example:animal:ferret:nose'" do
+        uri = MachineURI.new "urn:example:animal:ferret:nose"
+        expect(uri.path).to eq("example:animal:ferret:nose")
+      end
+    end
+
     describe "#query" do
       it "should be 'name=ferret'" do
         uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
@@ -112,6 +131,7 @@ RSpec.describe MachineURI do
         expect(uri.query).to be_nil
       end
     end
+
     describe "#fragment" do
       it "should be 'nose'" do
         uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
@@ -127,15 +147,17 @@ RSpec.describe MachineURI do
       end
     end
 
-    it "should be parse" do
+    it "should be parsed" do
       uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
       expect(uri.scheme).to eq("foo")
       expect(uri.userinfo).to eq("john")
       expect(uri.host).to eq("example.com")
       expect(uri.port).to eq(8042)
+      expect(uri.path).to eq("/over/there")
       expect(uri.query).to eq("name=ferret")
       expect(uri.fragment).to eq("nose")
     end
+
   end
 end
 

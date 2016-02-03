@@ -19,7 +19,7 @@
 class URIParserError < Exception; end
 
 class MachineURI
-  attr_accessor :scheme, :host, :userinfo, :port, :query, :fragment
+  attr_accessor :scheme, :host, :userinfo, :port, :query, :fragment, :path
   def initialize(data)
     @is_valid = false
     eof = data.length
