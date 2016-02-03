@@ -8,33 +8,18 @@
   machine m_uri;
   include uri "../machines/uri.rl";
 
-  action fetch_scheme{
-    @scheme = data[0..p-1]
-  }
-
-  action fetch_host{
-    @host = data[start..p]
-  }
-
-  m_authority = (USERINFO "@")? HOST >{start=p} @fetch_host (":" PORT)?;
-  m_rel_part   = ("//" m_authority PATH_ABEMPTY) |
-                 PATH_ABSOLUTE |
-                 PATH_NOSCHEME |
-                 PATH_EMPTY ;
-  m_hpart     = ("//" m_authority PATH_ABEMPTY) |
-                PATH_ABSOLUTE |
-                PATH_ROOTLESS |
-                PATH_EMPTY;
-  m_uri       = SCHEME %fetch_scheme
-                ":" m_hpart ("?" QUERY)? ("#" FRAGMENT)?;
-  m_rel_ref   = m_rel_part ("?" QUERY)? ("#" FRAGMENT)?;
-  main := m_uri | m_rel_ref;
+# Additionally treat SIP URI scheme which seems to be somehow not compatible
+# with RFC986.
+# http://www.ietf.org/mail-archive/web/sip/current/msg26338.html
+# http://www.ietf.org/mail-archive/web/sip/current/msg26385.html
+# Here comes RFC3261 ABN form.
+  main := URI_REF; # | SIP_URI
 }%%
 =end
 class URIParserError < Exception; end
 
 class MachineURI
-  attr_accessor :scheme, :host
+  attr_accessor :scheme, :host, :userinfo, :port, :query, :fragment
   def initialize(data)
     @is_valid = false
     eof = data.length
