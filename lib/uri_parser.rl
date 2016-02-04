@@ -6,14 +6,11 @@
 =begin
 %%{
   machine m_uri;
+  include ip_addr "../machines/ip_addr.rl";
   include uri "../machines/uri.rl";
+  include sip_uri "../machines/sip_uri.rl";
 
-# Additionally treat SIP URI scheme which seems to be somehow not compatible
-# with RFC986.
-# http://www.ietf.org/mail-archive/web/sip/current/msg26338.html
-# http://www.ietf.org/mail-archive/web/sip/current/msg26385.html
-# Here comes RFC3261 ABN form.
-  main := URI_REF; # | SIP_URI
+  main := URI_REF | SIP_URI;
 }%%
 =end
 class URIParserError < Exception; end
@@ -23,7 +20,7 @@ class MachineURI
   def initialize(data)
     @is_valid = false
     eof = data.length
-    start = 0
+    mark = 0
     %% write data;
     %% write init;
     %% write exec;

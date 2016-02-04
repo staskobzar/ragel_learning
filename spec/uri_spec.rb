@@ -62,10 +62,10 @@ RSpec.describe MachineURI do
         uri = MachineURI.new "foo://example.com:8042/over/there?name=ferret#nose"
         expect(uri.host).to eq("example.com")
       end
-      #it "should be 'sip-provider.info'" do
-        #uri = MachineURI.new "sip:12345@sip-provider.info:5060"
-        #expect(uri.host).to eq("sip-provider.info")
-      #end
+      it "should be 'sip-provider.info'" do
+        uri = MachineURI.new "sip:12345@sip-provider.info:5060"
+        expect(uri.host).to eq("sip-provider.info")
+      end
       it "should be '[2001:db8::7]'" do
         uri = MachineURI.new "ldap://[2001:db8::7]/c=GB?objectClass?one"
         expect(uri.host).to eq("[2001:db8::7]")
@@ -89,10 +89,10 @@ RSpec.describe MachineURI do
         uri = MachineURI.new "ldap://[2001:db8::7]/c=GB?objectClass?one"
         expect(uri.userinfo).to be_nil
       end
-      #it "should be '12345'" do
-      #  uri = MachineURI.new "sip:12345@sip-provider.info:5060"
-      #  expect(uri.userinfo).to eq("12345")
-      #end
+      it "should be '12345'" do
+        uri = MachineURI.new "sip:12345@sip-provider.info:5060"
+        expect(uri.userinfo).to eq("12345")
+      end
     end
 
     describe "#port" do
@@ -103,6 +103,10 @@ RSpec.describe MachineURI do
       it "should be nil" do
         uri = MachineURI.new "http://www.ietf.org/rfc/rfc2396.txt"
         expect(uri.port).to be_nil
+      end
+      it "should be '5060'" do
+        uri = MachineURI.new "sip:12345@sip-provider.info:5060"
+        expect(uri.port).to eq(5060)
       end
     end
 

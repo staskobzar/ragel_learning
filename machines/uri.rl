@@ -10,7 +10,6 @@
 
 %%{
   machine uri;
-  include ip_addr "ip_addr.rl";
 
 #
 # == ACTION
@@ -20,27 +19,27 @@
   }
 
   action fetch_host{
-    @host = data[start..p-1]
+    @host = data[mark..p-1]
   }
 
   action fetch_userinfo{
-    @userinfo = data[start..p-1]
+    @userinfo = data[mark..p-1]
   }
 
   action fetch_port{
-    @port = data[start..p-1].to_i
+    @port = data[mark..p-1].to_i
   }
 
   action fetch_path{
-    @path = data[start..p-1]
+    @path = data[mark..p-1]
   }
 
   action fetch_query{
-    @query = data[start..p-1]
+    @query = data[mark..p-1]
   }
 
   action fetch_fragment{
-    @fragment = data[start..p-1]
+    @fragment = data[mark..p-1]
   }
 
 #
@@ -71,9 +70,9 @@
   IPv_FUTURE      = "v" xdigit{1,} "." (UNRESERVED | SUB_DELIMS | ":"){1,};
   IP_LITERAL      = "[" (IPv6_ADDR | IPv_FUTURE) "]";
   REG_NAME        = (UNRESERVED | PCT_ENC | SUB_DELIMS)*;
-  HOST            = (IP_LITERAL | IPv4_ADDR | REG_NAME) >{start=p} %fetch_host;
+  HOST            = (IP_LITERAL | IPv4_ADDR | REG_NAME) >{mark=p} %fetch_host;
   PORT            = digit*;
-  AUTHORITY       = (USERINFO >{start=p} %fetch_userinfo "@")? HOST (":" PORT >{start=p} %fetch_port)?;
+  AUTHORITY       = (USERINFO >{mark=p} %fetch_userinfo "@")? HOST (":" PORT >{mark=p} %fetch_port)?;
   
 # Path RFC 3986 Section 3.3
   PCHAR           = UNRESERVED | PCT_ENC | SUB_DELIMS | ":" | "@";
@@ -81,10 +80,10 @@
   SEG_NZ          = PCHAR{1,};
   SEGMENT         = PCHAR*;
   PATH_EMPTY      = '\0';
-  PATH_ROOTLESS   = (SEG_NZ ("/" SEGMENT)*)  >{start=p} %fetch_path;
-  PATH_NOSCHEME   = (SEG_NZ_NC ("/" SEGMENT)*) >{start=p} %fetch_path;
-  PATH_ABSOLUTE   = ("/" (SEG_NZ ("/" SEGMENT)*)?) >{start=p} %fetch_path;
-  PATH_ABEMPTY    = ("/" SEGMENT)* >{start=p} %fetch_path;
+  PATH_ROOTLESS   = (SEG_NZ ("/" SEGMENT)*)  >{mark=p} %fetch_path;
+  PATH_NOSCHEME   = (SEG_NZ_NC ("/" SEGMENT)*) >{mark=p} %fetch_path;
+  PATH_ABSOLUTE   = ("/" (SEG_NZ ("/" SEGMENT)*)?) >{mark=p} %fetch_path;
+  PATH_ABEMPTY    = ("/" SEGMENT)* >{mark=p} %fetch_path;
 
   PATH            = PATH_ABEMPTY | # begins with "/" or is empty
                     PATH_ABSOLUTE | # begins with "/" but not "//"
@@ -94,11 +93,11 @@
 
 # The query component contains non-hierarchical
 # Section 3.4
-  QUERY           = (PCHAR | "/" | "?")* >{start=p} %fetch_query;
+  QUERY           = (PCHAR | "/" | "?")* >{mark=p} %fetch_query;
 
 # Fragment
 # Section 3.5
-  FRAGMENT        = (PCHAR | "/" | "?")* >{start=p} %fetch_fragment;
+  FRAGMENT        = (PCHAR | "/" | "?")* >{mark=p} %fetch_fragment;
 
 # Relative Reference
 # Section 4.2
