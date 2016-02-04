@@ -6,8 +6,9 @@
 =begin
 %%{
   machine m_uri;
+  include actions "../machines/ruby_actions.rl";
   include ip_addr "../machines/ip_addr.rl";
-  include uri "../machines/uri.rl";
+  include uri     "../machines/uri.rl";
   include sip_uri "../machines/sip_uri.rl";
 
   main := URI_REF | SIP_URI;

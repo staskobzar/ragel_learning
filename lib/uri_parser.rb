@@ -7,7 +7,7 @@
 
 =begin
 
-# line 14 "lib/uri_parser.rl"
+# line 15 "lib/uri_parser.rl"
 
 =end
 class URIParserError < Exception; end
@@ -10268,7 +10268,7 @@ end
 self.m_uri_en_main = 1;
 
 
-# line 25 "lib/uri_parser.rl"
+# line 26 "lib/uri_parser.rl"
     
 # line 10274 "lib/uri_parser.rb"
 begin
@@ -10277,7 +10277,7 @@ begin
 	cs = m_uri_start
 end
 
-# line 26 "lib/uri_parser.rl"
+# line 27 "lib/uri_parser.rl"
     
 # line 10283 "lib/uri_parser.rb"
 begin
@@ -10361,75 +10361,75 @@ begin
 			_acts += 1
 			case _m_uri_actions[_acts - 1]
 when 0 then
-# line 17 "lib/../machines/uri.rl"
+# line 4 "lib/../machines/ruby_actions.rl"
 		begin
 
     @scheme = data[0..p-1]
   		end
 when 1 then
-# line 21 "lib/../machines/uri.rl"
+# line 8 "lib/../machines/ruby_actions.rl"
 		begin
 
     @host = data[mark..p-1]
   		end
 when 2 then
-# line 25 "lib/../machines/uri.rl"
+# line 12 "lib/../machines/ruby_actions.rl"
 		begin
 
     @userinfo = data[mark..p-1]
   		end
 when 3 then
-# line 29 "lib/../machines/uri.rl"
+# line 16 "lib/../machines/ruby_actions.rl"
 		begin
 
     @port = data[mark..p-1].to_i
   		end
 when 4 then
-# line 33 "lib/../machines/uri.rl"
+# line 20 "lib/../machines/ruby_actions.rl"
 		begin
 
     @path = data[mark..p-1]
   		end
 when 5 then
-# line 37 "lib/../machines/uri.rl"
+# line 24 "lib/../machines/ruby_actions.rl"
 		begin
 
     @query = data[mark..p-1]
   		end
 when 7 then
-# line 73 "lib/../machines/uri.rl"
+# line 38 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 8 then
-# line 75 "lib/../machines/uri.rl"
+# line 40 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 9 then
-# line 75 "lib/../machines/uri.rl"
+# line 40 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 10 then
-# line 83 "lib/../machines/uri.rl"
+# line 48 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 11 then
-# line 84 "lib/../machines/uri.rl"
+# line 49 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 12 then
-# line 85 "lib/../machines/uri.rl"
+# line 50 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 13 then
-# line 86 "lib/../machines/uri.rl"
+# line 51 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 14 then
-# line 96 "lib/../machines/uri.rl"
+# line 61 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 15 then
-# line 100 "lib/../machines/uri.rl"
+# line 65 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 16 then
@@ -10473,53 +10473,53 @@ mark=p		end
 		__acts += 1
 		case _m_uri_actions[__acts - 1]
 when 1 then
-# line 21 "lib/../machines/uri.rl"
+# line 8 "lib/../machines/ruby_actions.rl"
 		begin
 
     @host = data[mark..p-1]
   		end
 when 3 then
-# line 29 "lib/../machines/uri.rl"
+# line 16 "lib/../machines/ruby_actions.rl"
 		begin
 
     @port = data[mark..p-1].to_i
   		end
 when 4 then
-# line 33 "lib/../machines/uri.rl"
+# line 20 "lib/../machines/ruby_actions.rl"
 		begin
 
     @path = data[mark..p-1]
   		end
 when 5 then
-# line 37 "lib/../machines/uri.rl"
+# line 24 "lib/../machines/ruby_actions.rl"
 		begin
 
     @query = data[mark..p-1]
   		end
 when 6 then
-# line 41 "lib/../machines/uri.rl"
+# line 28 "lib/../machines/ruby_actions.rl"
 		begin
 
     @fragment = data[mark..p-1]
   		end
 when 7 then
-# line 73 "lib/../machines/uri.rl"
+# line 38 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 9 then
-# line 75 "lib/../machines/uri.rl"
+# line 40 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 13 then
-# line 86 "lib/../machines/uri.rl"
+# line 51 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 14 then
-# line 96 "lib/../machines/uri.rl"
+# line 61 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 when 15 then
-# line 100 "lib/../machines/uri.rl"
+# line 65 "lib/../machines/uri.rl"
 		begin
 mark=p		end
 # line 10526 "lib/uri_parser.rb"
@@ -10536,7 +10536,7 @@ end
 	end
 	end
 
-# line 27 "lib/uri_parser.rl"
+# line 28 "lib/uri_parser.rl"
     #%
     if cs >= m_uri_first_final
       @is_valid = true
