@@ -14,12 +14,16 @@
   main := URI_REF | SIP_URI;
 }%%
 =end
+require 'uri'
 class URIParserError < Exception; end
 
 class MachineURI
-  attr_accessor :scheme, :host, :userinfo, :port, :query, :fragment, :path
+  attr_accessor :scheme, :host, :userinfo, :port, :query, 
+                :fragment, :username, :password, :path, :param, :header
   def initialize(data)
     @is_valid = false
+    @param = {}
+    @header = {}
     eof = data.length
     mark = 0
     %% write data;

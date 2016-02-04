@@ -151,17 +151,31 @@ RSpec.describe MachineURI do
       end
     end
 
-    it "should be parsed" do
-      uri = MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"
-      expect(uri.scheme).to eq("foo")
-      expect(uri.userinfo).to eq("john")
-      expect(uri.host).to eq("example.com")
-      expect(uri.port).to eq(8042)
-      expect(uri.path).to eq("/over/there")
-      expect(uri.query).to eq("name=ferret")
-      expect(uri.fragment).to eq("nose")
+    context "should be parsed to fields" do
+      let(:uri) {MachineURI.new "foo://john@example.com:8042/over/there?name=ferret#nose"}
+      it{expect(uri.scheme).to eq("foo")}
+      it{expect(uri.userinfo).to eq("john")}
+      it{expect(uri.host).to eq("example.com")}
+      it{expect(uri.port).to eq(8042)}
+      it{expect(uri.path).to eq("/over/there")}
+      it{expect(uri.query).to eq("name=ferret")}
+      it{expect(uri.fragment).to eq("nose")}
     end
 
+    context "should parse SIP to fields" do
+      let(:uri){MachineURI.new "sips:alice:secretW0rd@gateway.com:5061;transport=udp;user=phone;method=REGISTER?subject=sales%20meeting&priority=urgent&to=sales%40city.com"}
+      it{expect(uri.scheme).to eq("sips")}
+      it{expect(uri.username).to eq("alice")}
+      it{expect(uri.password).to eq("secretW0rd")}
+      it{expect(uri.host).to eq("gateway.com")}
+      it{expect(uri.port).to eq(5061)}
+      it{expect(uri.param[:transport]).to eq("udp")}
+      it{expect(uri.param[:user]).to eq("phone")}
+      it{expect(uri.param[:method]).to eq("REGISTER")}
+      it{expect(uri.header[:subject]).to eq("sales meeting")}
+      it{expect(uri.header[:priority]).to eq("urgent")}
+      it{expect(uri.header[:to]).to eq("sales@city.com")}
+    end
   end
 end
 

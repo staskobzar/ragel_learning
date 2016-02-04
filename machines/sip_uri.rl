@@ -19,7 +19,7 @@
   HNV_UNRESERVED  = [[\]/?:+$];
   HNAME           = (HNV_UNRESERVED | SIP_UNRESERVED | ESCAPED){1,};
   HVALUE          = (HNV_UNRESERVED | SIP_UNRESERVED | ESCAPED)*;
-  HEADER          = HNAME "=" HVALUE;
+  HEADER          = HNAME >mark_start "=" HVALUE %fetch_sipuri_header;
 
   TEL_SUBSCRIBER  = zlen; # will implement in future
 
@@ -43,7 +43,7 @@
   URI_PARAM       = TRANSPORT_PARAM | USER_PARAM | METHOD_PARAM |
                     TTL_PARAM | MADDR_PARAM | LR_PARAM | OTHER_PARAM;
 
-  URI_PARAMS      = ( ";" URI_PARAM )*;
+  URI_PARAMS      = ( ";" URI_PARAM )* >mark_start %fetch_uri_params;
 
   HEADERS         = "?" HEADER ("&" HEADER)*;
 

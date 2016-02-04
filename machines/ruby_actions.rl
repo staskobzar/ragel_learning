@@ -15,6 +15,7 @@
 
   action fetch_userinfo{
     @userinfo = data[mark..p-1]
+    @username, @password = @userinfo.split(":")
   }
 
   action fetch_port{
@@ -31,5 +32,18 @@
 
   action fetch_fragment{
     @fragment = data[mark..p-1]
+  }
+
+# Actions for SIP URI
+  action fetch_uri_params{
+    data[mark..p-1].split(";").each do |param|
+      next if param.empty?
+      k,v = param.split("=")
+      @param[k.to_sym] = v
+    end
+  }
+  action fetch_sipuri_header{
+    k,v = data[mark..p-1].split("=")
+    @header[k.to_sym] = URI.unescape(v)
   }
 }%%
