@@ -35,9 +35,9 @@
   IPv_FUTURE      = "v" xdigit{1,} "." (UNRESERVED | SUB_DELIMS | ":"){1,};
   IP_LITERAL      = "[" (IPv6_ADDR | IPv_FUTURE) "]";
   REG_NAME        = (UNRESERVED | PCT_ENC | SUB_DELIMS)*;
-  HOST            = (IP_LITERAL | IPv4_ADDR | REG_NAME) >{mark=p} %fetch_host;
+  HOST            = (IP_LITERAL | IPv4_ADDR | REG_NAME) >mark_start %fetch_host;
   PORT            = digit*;
-  AUTHORITY       = (USERINFO >{mark=p} %fetch_userinfo "@")? HOST (":" PORT >{mark=p} %fetch_port)?;
+  AUTHORITY       = (USERINFO >mark_start %fetch_userinfo "@")? HOST (":" PORT >mark_start %fetch_port)?;
   
 # Path RFC 3986 Section 3.3
   PCHAR           = UNRESERVED | PCT_ENC | SUB_DELIMS | ":" | "@";
@@ -45,10 +45,10 @@
   SEG_NZ          = PCHAR{1,};
   SEGMENT         = PCHAR*;
   PATH_EMPTY      = '\0';
-  PATH_ROOTLESS   = (SEG_NZ ("/" SEGMENT)*)  >{mark=p} %fetch_path;
-  PATH_NOSCHEME   = (SEG_NZ_NC ("/" SEGMENT)*) >{mark=p} %fetch_path;
-  PATH_ABSOLUTE   = ("/" (SEG_NZ ("/" SEGMENT)*)?) >{mark=p} %fetch_path;
-  PATH_ABEMPTY    = ("/" SEGMENT)* >{mark=p} %fetch_path;
+  PATH_ROOTLESS   = (SEG_NZ ("/" SEGMENT)*)  >mark_start %fetch_path;
+  PATH_NOSCHEME   = (SEG_NZ_NC ("/" SEGMENT)*) >mark_start %fetch_path;
+  PATH_ABSOLUTE   = ("/" (SEG_NZ ("/" SEGMENT)*)?) >mark_start %fetch_path;
+  PATH_ABEMPTY    = ("/" SEGMENT)* >mark_start %fetch_path;
 
   PATH            = PATH_ABEMPTY | # begins with "/" or is empty
                     PATH_ABSOLUTE | # begins with "/" but not "//"
@@ -58,11 +58,11 @@
 
 # The query component contains non-hierarchical
 # Section 3.4
-  QUERY           = (PCHAR | "/" | "?")* >{mark=p} %fetch_query;
+  QUERY           = (PCHAR | "/" | "?")* >mark_start %fetch_query;
 
 # Fragment
 # Section 3.5
-  FRAGMENT        = (PCHAR | "/" | "?")* >{mark=p} %fetch_fragment;
+  FRAGMENT        = (PCHAR | "/" | "?")* >mark_start %fetch_fragment;
 
 # Relative Reference
 # Section 4.2

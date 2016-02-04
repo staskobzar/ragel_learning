@@ -1,6 +1,10 @@
 %%{
   machine actions;
 
+  action mark_start{
+    mark = p
+  }
+
   action fetch_scheme{
     @scheme = data[0..p-1]
   }

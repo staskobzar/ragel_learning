@@ -25,13 +25,13 @@
 
   USER            = ( SIP_UNRESERVED | ESCAPED | USER_UNRESERVED ){1,};
   PASSWORD        = ( SIP_UNRESERVED | ESCAPED | [&=+$,] )*;
-  SIP_UINFO       = ( USER | TEL_SUBSCRIBER ) >{mark=p} ( ":" PASSWORD )? %fetch_userinfo "@";
+  SIP_UINFO       = ( USER | TEL_SUBSCRIBER ) >mark_start ( ":" PASSWORD )? %fetch_userinfo "@";
   DOMAINLABEL     = alnum | (alnum (alnum | "-")* alnum);
   TOPLABEL        = alpha | (alpha (alnum | "-")* alnum);
   HOSTNAME        = (DOMAINLABEL ".")* TOPLABEL "."?;
-  SIPHOST         = (HOSTNAME | IPv4_ADDR | IPv6_ADDR) >{mark=p} %fetch_host;
+  SIPHOST         = (HOSTNAME | IPv4_ADDR | IPv6_ADDR) >mark_start %fetch_host;
 
-  HOSTPORT        = SIPHOST (":" digit{1,} >{mark=p} %fetch_port)? ;
+  HOSTPORT        = SIPHOST (":" digit{1,} >mark_start %fetch_port)? ;
 
   OTHER_PARAM     = PNAME ("=" PVALUE)?;
   LR_PARAM        = "lr";
