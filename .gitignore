@@ -8,6 +8,7 @@ Gemfile.lock
 *.rbc
 *.log
 *.dot
+*.svg
 bundle
 .bundle
 specs.out
