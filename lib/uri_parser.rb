@@ -10,7 +10,6 @@
 # line 15 "lib/uri_parser.rl"
 
 =end
-require 'uri'
 class URIParserError < Exception; end
 
 class MachineURI
@@ -23,7 +22,7 @@ class MachineURI
     eof = data.length
     mark = 0
     
-# line 27 "lib/uri_parser.rb"
+# line 26 "lib/uri_parser.rb"
 class << self
 	attr_accessor :_m_uri_actions
 	private :_m_uri_actions, :_m_uri_actions=
@@ -10276,18 +10275,18 @@ end
 self.m_uri_en_main = 1;
 
 
-# line 30 "lib/uri_parser.rl"
+# line 29 "lib/uri_parser.rl"
     
-# line 10282 "lib/uri_parser.rb"
+# line 10281 "lib/uri_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_uri_start
 end
 
-# line 31 "lib/uri_parser.rl"
+# line 30 "lib/uri_parser.rl"
     
-# line 10291 "lib/uri_parser.rb"
+# line 10290 "lib/uri_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -10428,7 +10427,7 @@ when 9 then
     k,v = data[mark..p-1].split("=")
     @header[k.to_sym] = URI.unescape(v)
   		end
-# line 10432 "lib/uri_parser.rb"
+# line 10431 "lib/uri_parser.rb"
 			end # action switch
 		end
 	end
@@ -10509,7 +10508,7 @@ when 9 then
     k,v = data[mark..p-1].split("=")
     @header[k.to_sym] = URI.unescape(v)
   		end
-# line 10513 "lib/uri_parser.rb"
+# line 10512 "lib/uri_parser.rb"
 		end # eof action switch
 	end
 	if _trigger_goto
@@ -10523,7 +10522,7 @@ end
 	end
 	end
 
-# line 32 "lib/uri_parser.rl"
+# line 31 "lib/uri_parser.rl"
     #%
     if cs >= m_uri_first_final
       @is_valid = true

@@ -1,44 +1,41 @@
 #
 # @LANG: ruby
-# Parsing URI
+# Scan text and extracts URI(s)
 # 
 
 =begin
 %%{
-  machine m_uri;
+  machine uri_scanner;
   include actions "../machines/ruby_actions.rl";
   include ip_addr "../machines/ip_addr.rl";
   include uri     "../machines/uri.rl";
   include sip_uri "../machines/sip_uri.rl";
 
-  main := URI_REF | SIP_URI;
+  main := |*
+    URI => {@collection << data[ts..te-1]};
+    any;
+  *|;
 }%%
 =end
-class URIParserError < Exception; end
 
-class MachineURI
+class MachineURIScanner
   attr_accessor :scheme, :host, :userinfo, :port, :query, 
-                :fragment, :username, :password, :path, :param, :header
+                :fragment, :username, :password, :path, :param, :header,
+                :collection
+
   def initialize(data)
-    @is_valid = false
-    @param = {}
-    @header = {}
+    @collection = []
     eof = data.length
-    mark = 0
     %% write data;
     %% write init;
     %% write exec;
     #%
-    if cs >= m_uri_first_final
-      @is_valid = true
-    else
-      raise URIParserError
+  end
+
+  class << self
+    def scan(data)
+      self.new(data).collection
     end
   end
-
-  def is_valid?
-    @is_valid
-  end
-
 end
 
