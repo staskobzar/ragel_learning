@@ -18,6 +18,7 @@
 }%%
 =end
 
+require 'uri_parser'
 class MachineURIScanner
   attr_accessor :scheme, :host, :userinfo, :port, :query, 
                 :fragment, :username, :password, :path, :param, :header,
@@ -33,8 +34,14 @@ class MachineURIScanner
   end
 
   class << self
-    def scan(data)
-      self.new(data).collection
+    def scan(data, to_objects=false)
+      if to_objects
+        self.new(data).collection.map do |url|
+          MachineURI.new(url)
+        end
+      else
+        self.new(data).collection
+      end
     end
   end
 end
