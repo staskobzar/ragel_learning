@@ -1,5 +1,7 @@
 # UriScanner
 
+> [![codecov.io](https://codecov.io/github/staskobzar/uri_scanner/coverage.svg?branch=master)](https://codecov.io/github/staskobzar/uri_scanner?branch=master) [![Build Status](https://travis-ci.org/staskobzar/uri_scanner.svg?branch=master)](https://travis-ci.org/staskobzar/uri_scanner)
+
 Simple library that parses URI or scans input text for URIs.
 RFC3986 compliant. SIP URIs parsing implemented following RFC3261.
 
