@@ -7,6 +7,18 @@ RSpec.describe MachineURIScanner do
       data = "text before http://example.com:8042/index.php?name=ferret#nose text after"
       expect(MachineURIScanner.scan(data)).to eql(%w{http://example.com:8042/index.php?name=ferret#nose})
     end
+    it "returns three URIs" do
+      data  = "Lorem ipsum dolor sit amet, consectetur "
+      data += "adipiscing elit, \"ftp://ftp.is.co.za/rfc/rfc1808.txt\" sed "
+      data += "do eiusmod tempor incididunt  <http://www.ietf.org/rfc/rfc2396.txt> "
+      data += "ut labore et ldap://[2001:db8::7]/c=GB?objectClass?one dolore magna aliqua."
+      expect(MachineURIScanner.scan(data).length).to be 3
+      expect(MachineURIScanner.scan(data)).to eql(%w{
+        ftp://ftp.is.co.za/rfc/rfc1808.txt
+        http://www.ietf.org/rfc/rfc2396.txt
+        ldap://[2001:db8::7]/c=GB?objectClass?one
+      })
+    end
     it "scans text from file" do
       f = File.open("spec/url.txt")
       expect(MachineURIScanner.scan(f.read).length).to be 15

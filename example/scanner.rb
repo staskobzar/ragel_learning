@@ -1,0 +1,1 @@
+require 'uri_scanner'

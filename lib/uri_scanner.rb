@@ -13,15 +13,13 @@
 
 require 'uri_parser'
 class MachineURIScanner
-  attr_accessor :scheme, :host, :userinfo, :port, :query, 
-                :fragment, :username, :password, :path, :param, :header,
-                :collection
+  attr_accessor :collection
 
   def initialize(data)
     @collection = []
     eof = data.length
     
-# line 25 "lib/uri_scanner.rb"
+# line 23 "lib/uri_scanner.rb"
 class << self
 	attr_accessor :_uri_scanner_actions
 	private :_uri_scanner_actions, :_uri_scanner_actions=
@@ -732,9 +730,9 @@ end
 self.uri_scanner_en_main = 189;
 
 
-# line 31 "lib/uri_scanner.rl"
+# line 29 "lib/uri_scanner.rl"
     
-# line 738 "lib/uri_scanner.rb"
+# line 736 "lib/uri_scanner.rb"
 begin
 	p ||= 0
 	pe ||= data.length
@@ -744,9 +742,9 @@ begin
 	act = 0
 end
 
-# line 32 "lib/uri_scanner.rl"
+# line 30 "lib/uri_scanner.rl"
     
-# line 750 "lib/uri_scanner.rb"
+# line 748 "lib/uri_scanner.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -776,7 +774,7 @@ begin
 		begin
 ts = p
 		end
-# line 780 "lib/uri_scanner.rb"
+# line 778 "lib/uri_scanner.rb"
 		end # from state action switch
 	end
 	if _trigger_goto
@@ -944,7 +942,7 @@ when 18 then
 end
 end 
 			end
-# line 948 "lib/uri_scanner.rb"
+# line 946 "lib/uri_scanner.rb"
 			end # action switch
 		end
 	end
@@ -964,7 +962,7 @@ when 8 then
 # line 1 "NONE"
 		begin
 ts = nil;		end
-# line 968 "lib/uri_scanner.rb"
+# line 966 "lib/uri_scanner.rb"
 		end # to state action switch
 	end
 	if _trigger_goto
@@ -991,7 +989,7 @@ end
 	end
 	end
 
-# line 33 "lib/uri_scanner.rl"
+# line 31 "lib/uri_scanner.rl"
     #%
   end
 

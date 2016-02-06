@@ -20,9 +20,7 @@
 
 require 'uri_parser'
 class MachineURIScanner
-  attr_accessor :scheme, :host, :userinfo, :port, :query, 
-                :fragment, :username, :password, :path, :param, :header,
-                :collection
+  attr_accessor :collection
 
   def initialize(data)
     @collection = []
