@@ -1,6 +1,10 @@
 # UriScanner
 
-TODO: Write a gem description
+Simple library that parses URI or scans input text for URIs.
+RFC3986 compliant. SIP URIs parsing implemented following RFC3261.
+
+This library is based on [Ragel State Machine Compiler](http://www.colm.net/open-source/ragel/).
+Ragel is great software created by Dr. Adrian D. Thurston.
 
 ## Installation
 
@@ -20,7 +24,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Start with:
+```ruby
+require 'uri_scanner'
+```
+There are only four core methods:
+
+```scan```: Scans text and return array of found URIs
+```ruby
+URIScanner.scan(text)
+```
+
+```parse_uri```: Parses uri and return object that allows access to URI segments.
+Raises ```URIParserError```
+```ruby
+uri = URIScanner.parse_uri(uri_string)
+uri.scheme
+uri.host
+uri.port
+uri.userinfo
+uri.username
+uri.password
+uri.path
+uri.query
+uri.fragment
+uri.param
+uri.header
+```
+
+```scan_and_parse```: Same as ```scan```, but retruns array of parsed URI objects (see parse_uri)
+```ruby
+URIScanner.scan_and_parse(text)
+```
+
+```is_ip_valid?```: Additional methos that validates IPv4/IPv6 (RFC3986 ABNF)
+```ruby
+URIScanner.is_ip_valid?(ip_string)
+```
+
+Check folder "example".
 
 ## Contributing
 
