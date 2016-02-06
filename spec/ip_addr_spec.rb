@@ -1,4 +1,4 @@
-require 'ip_address'
+require 'uri_scanner/ip_address'
 
 RSpec.describe MachineIpAddr do
   let(:ip){ MachineIpAddr.new }

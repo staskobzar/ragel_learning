@@ -1,12 +1,12 @@
 
-# line 1 "lib/ip_address.rl"
+# line 1 "lib/uri_scanner/ip_address.rl"
 #
 # @LANG: ruby
 # Parsing IP address (IPv4/IPv6) 
 # 
 
 
-# line 11 "lib/ip_address.rl"
+# line 11 "lib/uri_scanner/ip_address.rl"
 
 
 # Ruby Class goes here
@@ -14,7 +14,7 @@ class MachineIpAddr
 
   def initialize
     
-# line 18 "lib/ip_address.rb"
+# line 18 "lib/uri_scanner/ip_address.rb"
 class << self
 	attr_accessor :_m_ipaddr_key_offsets
 	private :_m_ipaddr_key_offsets, :_m_ipaddr_key_offsets=
@@ -418,21 +418,21 @@ end
 self.m_ipaddr_en_main = 1;
 
 
-# line 18 "lib/ip_address.rl"
+# line 18 "lib/uri_scanner/ip_address.rl"
   end
 
   def is_valid?(data)
     
-# line 427 "lib/ip_address.rb"
+# line 427 "lib/uri_scanner/ip_address.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_ipaddr_start
 end
 
-# line 22 "lib/ip_address.rl"
+# line 22 "lib/uri_scanner/ip_address.rl"
     
-# line 436 "lib/ip_address.rb"
+# line 436 "lib/uri_scanner/ip_address.rb"
 begin
 	_klen, _trans, _keys = nil
 	_goto_level = 0
@@ -524,7 +524,7 @@ begin
 	end
 	end
 
-# line 23 "lib/ip_address.rl"
+# line 23 "lib/uri_scanner/ip_address.rl"
     cs >= m_ipaddr_first_final
   end
 end

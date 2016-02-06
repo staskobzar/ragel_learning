@@ -1,11 +1,14 @@
-require 'uri'
-require 'uri_parser'
+require 'uri_scanner/uri_parser'
 
 RSpec.describe MachineURI do
   context "validate URI" do
     specify {
       expect(MachineURI.new("http://www.ietf.org/rfc/rfc2396.txt")
         .is_valid?).to be true}
+
+    specify {
+      expect{ MachineURI.new("1http://www.ietf.org/rfc/rfc2396.txt") }
+        .to raise_error(URIParserError)}
 
     it "testing multiple samples with authority part" do
       %W{
@@ -18,6 +21,7 @@ RSpec.describe MachineURI do
         eXAMPLE://a/./b/../b/%63/%7bfoo%7d
         foo://example.com:8042/over/there?name=ferret#nose
         foo://info.example.com?fred
+        redis://host:6503/dbindex/keyname
       }.each do |uri|
           expect( MachineURI.new(uri).is_valid? ).to be true
         end

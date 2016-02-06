@@ -1,5 +1,5 @@
-require 'uri'
-require 'uri_scanner'
+require 'uri_scanner/uri_parser'
+require 'uri_scanner/uri_scanner'
 
 RSpec.describe MachineURIScanner do
   describe "#scan" do
@@ -34,6 +34,7 @@ RSpec.describe MachineURIScanner do
       specify{expect(scanner.last.host).to eq("sip-provider.info")}
       specify{expect(scanner[1].query).to eq("fred")}
     end
+
   end
 end
 

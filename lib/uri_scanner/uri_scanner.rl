@@ -18,7 +18,6 @@
 }%%
 =end
 
-require 'uri_parser'
 class MachineURIScanner
   attr_accessor :collection
 

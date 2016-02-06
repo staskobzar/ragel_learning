@@ -32,7 +32,7 @@ class MachineURI
     if cs >= m_uri_first_final
       @is_valid = true
     else
-      raise URIParserError
+      raise URIParserError, "Invalid URI: #{data}"
     end
   end
 

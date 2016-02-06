@@ -1,5 +1,5 @@
 
-# line 1 "lib/uri_parser.rl"
+# line 1 "lib/uri_scanner/uri_parser.rl"
 #
 # @LANG: ruby
 # Parsing URI
@@ -7,7 +7,7 @@
 
 =begin
 
-# line 15 "lib/uri_parser.rl"
+# line 15 "lib/uri_scanner/uri_parser.rl"
 
 =end
 class URIParserError < Exception; end
@@ -22,7 +22,7 @@ class MachineURI
     eof = data.length
     mark = 0
     
-# line 26 "lib/uri_parser.rb"
+# line 26 "lib/uri_scanner/uri_parser.rb"
 class << self
 	attr_accessor :_m_uri_actions
 	private :_m_uri_actions, :_m_uri_actions=
@@ -10275,18 +10275,18 @@ end
 self.m_uri_en_main = 1;
 
 
-# line 29 "lib/uri_parser.rl"
+# line 29 "lib/uri_scanner/uri_parser.rl"
     
-# line 10281 "lib/uri_parser.rb"
+# line 10281 "lib/uri_scanner/uri_parser.rb"
 begin
 	p ||= 0
 	pe ||= data.length
 	cs = m_uri_start
 end
 
-# line 30 "lib/uri_parser.rl"
+# line 30 "lib/uri_scanner/uri_parser.rl"
     
-# line 10290 "lib/uri_parser.rb"
+# line 10290 "lib/uri_scanner/uri_parser.rb"
 begin
 	_klen, _trans, _keys, _acts, _nacts = nil
 	_goto_level = 0
@@ -10368,50 +10368,50 @@ begin
 			_acts += 1
 			case _m_uri_actions[_acts - 1]
 when 0 then
-# line 4 "lib/../machines/ruby_actions.rl"
+# line 4 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     mark = p
   		end
 when 1 then
-# line 8 "lib/../machines/ruby_actions.rl"
+# line 8 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @scheme = data[0..p-1]
   		end
 when 2 then
-# line 12 "lib/../machines/ruby_actions.rl"
+# line 12 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @host = data[mark..p-1]
   		end
 when 3 then
-# line 16 "lib/../machines/ruby_actions.rl"
+# line 16 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @userinfo = data[mark..p-1]
     @username, @password = @userinfo.split(":")
   		end
 when 4 then
-# line 21 "lib/../machines/ruby_actions.rl"
+# line 21 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @port = data[mark..p-1].to_i
   		end
 when 5 then
-# line 25 "lib/../machines/ruby_actions.rl"
+# line 25 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @path = data[mark..p-1]
   		end
 when 6 then
-# line 29 "lib/../machines/ruby_actions.rl"
+# line 29 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @query = data[mark..p-1]
   		end
 when 8 then
-# line 38 "lib/../machines/ruby_actions.rl"
+# line 38 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     data[mark..p-1].split(";").each do |param|
@@ -10421,13 +10421,13 @@ when 8 then
     end
   		end
 when 9 then
-# line 45 "lib/../machines/ruby_actions.rl"
+# line 45 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     k,v = data[mark..p-1].split("=")
     @header[k.to_sym] = URI.unescape(v)
   		end
-# line 10431 "lib/uri_parser.rb"
+# line 10431 "lib/uri_scanner/uri_parser.rb"
 			end # action switch
 		end
 	end
@@ -10456,43 +10456,43 @@ when 9 then
 		__acts += 1
 		case _m_uri_actions[__acts - 1]
 when 0 then
-# line 4 "lib/../machines/ruby_actions.rl"
+# line 4 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     mark = p
   		end
 when 2 then
-# line 12 "lib/../machines/ruby_actions.rl"
+# line 12 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @host = data[mark..p-1]
   		end
 when 4 then
-# line 21 "lib/../machines/ruby_actions.rl"
+# line 21 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @port = data[mark..p-1].to_i
   		end
 when 5 then
-# line 25 "lib/../machines/ruby_actions.rl"
+# line 25 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @path = data[mark..p-1]
   		end
 when 6 then
-# line 29 "lib/../machines/ruby_actions.rl"
+# line 29 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @query = data[mark..p-1]
   		end
 when 7 then
-# line 33 "lib/../machines/ruby_actions.rl"
+# line 33 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     @fragment = data[mark..p-1]
   		end
 when 8 then
-# line 38 "lib/../machines/ruby_actions.rl"
+# line 38 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     data[mark..p-1].split(";").each do |param|
@@ -10502,13 +10502,13 @@ when 8 then
     end
   		end
 when 9 then
-# line 45 "lib/../machines/ruby_actions.rl"
+# line 45 "lib/uri_scanner/../machines/ruby_actions.rl"
 		begin
 
     k,v = data[mark..p-1].split("=")
     @header[k.to_sym] = URI.unescape(v)
   		end
-# line 10512 "lib/uri_parser.rb"
+# line 10512 "lib/uri_scanner/uri_parser.rb"
 		end # eof action switch
 	end
 	if _trigger_goto
@@ -10522,12 +10522,12 @@ end
 	end
 	end
 
-# line 31 "lib/uri_parser.rl"
+# line 31 "lib/uri_scanner/uri_parser.rl"
     #%
     if cs >= m_uri_first_final
       @is_valid = true
     else
-      raise URIParserError
+      raise URIParserError, "Invalid URI: #{data}"
     end
   end
 
