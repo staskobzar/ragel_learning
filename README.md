@@ -6,7 +6,7 @@ Simple library that parses URI or scans input text for URIs.
 RFC3986 compliant. SIP URIs parsing implemented following RFC3261.
 
 This library is based on [Ragel State Machine Compiler](http://www.colm.net/open-source/ragel/).
-Ragel is great software created by Dr. Adrian D. Thurston.
+Ragel is a great software created by Dr. Adrian D. Thurston.
 
 ## Installation
 
